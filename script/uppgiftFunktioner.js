@@ -1,92 +1,181 @@
-//! Uppgift 1
-function greetUser(name) {
-    if (!name) {
-        return "Hej gäst 👋";
+// ========================================
+// FACIT – FUNKTIONER (MINDRE UPPGIFTER)
+// ========================================
+
+
+// ========================================
+// 1. Ålderskontroll
+// User story:
+// Som användare vill jag kunna ange en ålder
+// så att jag får veta om personen är ett barn eller en vuxen.
+// ========================================
+
+function checkAge(age) {
+    if (age < 18) {
+        return "Child"
     } else {
-        return "Hej " + name;
+        return "Adult"
     }
 }
 
-console.log(greetUser("Stina"))
+console.log("1. Ålderskontroll")
+console.log(checkAge(12)) // Child
+console.log(checkAge(25)) // Adult
 
-const greetUserArrow = (name) => {
-    return "Hej " + (name || "gäst")
+
+// ========================================
+// 2. Temperatur
+// User story:
+// Som användare vill jag kunna ange en temperatur
+// så att jag får en beskrivning av hur varmt eller kallt det är.
+// ========================================
+
+function getTemperatureStatus(temp) {
+    if (temp < 0) {
+        return "Freezing"
+    } else if (temp <= 20) {
+        return "Cold"
+    } else if (temp <= 30) {
+        return "Warm"
+    } else {
+        return "Hot"
+    }
 }
 
-console.log(greetUserArrow("johan"))
+console.log("2. Temperatur")
+console.log(getTemperatureStatus(-5)) // Freezing
+console.log(getTemperatureStatus(10)) // Cold
+console.log(getTemperatureStatus(25)) // Warm
+console.log(getTemperatureStatus(35)) // Hot
 
-//! Uppgift 2
-function isValidUser(name, age) {
-    if (name && age >= 18) {
+
+// ========================================
+// 3. Jämna tal
+// User story:
+// Som utvecklare vill jag kunna kontrollera om ett tal är jämnt
+// så att jag kan använda det i andra delar av programmet.
+// ========================================
+
+function isEven(number) {
+    if (number % 2 === 0) {
         return true
-    }
-    else {
+    } else {
         return false
     }
 }
 
-console.log('isValidUser', isValidUser('Edvard', 25))
+console.log("3. Jämna tal")
+console.log(isEven(10)) // true
+console.log(isEven(7)) // false
 
-// function isValidUser(name, age) {
-
-//     if (typeof name !== "string" || typeof age !== "number" || age < 18) {
-//         console.log("false");
-//     } else {
-//         console.log("true");
-//     }
-// }
-
-// isValidUser("johan", 45)
-
-function isValidUser(name, age) {
-    return !!(name && age >= 18); // gör om till boolean
+if (isEven(10)) {
+    console.log("10 is even")
+} else {
+    console.log("10 is odd")
 }
 
-//! Uppgift 3
-let count = 0;
 
-function incrementCounter() {
-    count++;
-    return count;
+// ========================================
+// 4. Beskriv tal
+// User story:
+// Som användare vill jag få en beskrivning av ett tal
+// så att jag vet om det är positivt/negativt och jämnt/udda.
+// ========================================
+
+function describeNumber(number) {
+    let evenOrOdd = ""
+    let positiveOrNegative = ""
+
+    if (isEven(number)) {
+        evenOrOdd = "Even"
+    } else {
+        evenOrOdd = "Odd"
+    }
+
+    if (number >= 0) {
+        positiveOrNegative = "positive"
+    } else {
+        positiveOrNegative = "negative"
+    }
+
+    return evenOrOdd + " and " + positiveOrNegative
 }
 
-for (let i = 0; i < 10; i++) {
-    console.log(incrementCounter())
+console.log("4. Beskriv tal")
+console.log(describeNumber(8))   // Even and positive
+console.log(describeNumber(-3))  // Odd and negative
+console.log(describeNumber(0))   // Even and positive
+
+
+// ========================================
+// 5. Entrésystem
+// User story:
+// Som arrangör vill jag kontrollera vilka som får komma in
+// så att bara rätt personer släpps in.
+// ========================================
+
+function canEnter(age, hasTicket) {
+    if (age >= 18 && hasTicket) {
+        return "Welcome"
+    } else {
+        return "Denied"
+    }
 }
 
-//!Uppgift 4
-let userVisits = 0
+console.log("5. Entrésystem")
+console.log(canEnter(20, true))   // Welcome
+console.log(canEnter(17, true))   // Denied
+console.log(canEnter(20, false))  // Denied
 
-function handleUser(name, age) {
-    if (name && age >= 18) {
-        userVisits++
-        return `Hej ${name} (besök:${userVisits})`
 
-        //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+// Bonus – Entrésystem med VIP
+function canEnterWithVip(age, hasTicket, vip) {
+    if (vip) {
+        return "Welcome"
+    } else if (age >= 18 && hasTicket) {
+        return "Welcome"
+    } else {
+        return "Denied"
+    }
+}
+
+console.log(canEnterWithVip(15, false, true)) // Welcome
+console.log(canEnterWithVip(22, true, false)) // Welcome
+console.log(canEnterWithVip(16, false, false)) // Denied
+
+//Elevlösning
+let isVip = true;
+let noVip = false;
+
+function canEnter(age, hasTicket, isVip) {
+    if (isVip) {
+        console.log("Welcome VIP");
+    } else if (age >= 18 && hasTicket) {
+
+        console.log("Welcome");
+    } else {
+        console.log("Denied");
+    }
+}
+
+//6.Kassasystem
+function calculateTotal(price, quantity) {
+    let total = price * quantity
+    let discountTotal = 0
+
+    if (total > 100 && quantity > 7) {
+        discountTotal = total * 0.8
+        return `Your total comes to: ${total} but with our discount you only pay ${discountTotal}`
+    }
+    else if (total > 100) {
+        discountTotal = total * 0.9
+        return `Your total comes to: ${total} but with our discount you only pay ${discountTotal}`
     }
     else {
-        return 'Ogitlg användare'
+        return `Your total comes to: ${total}`
     }
 }
 
-console.log(handleUser("Johan", 15))
-console.log(handleUser("Johan", 45))
-console.log(handleUser("Johan", 45))
-console.log(handleUser("Johan", 45))
-
-
-//* BONUS
-const userName = prompt("Vad heter du?")
-const userAge = prompt("Hur gammal är du?")
-
-function isValidUserPrompt(name, age) {
-    if (name && age >= 18) {
-        return "✅ Du är en valid user"
-    } else {
-        return "🛑 Du är inte en valid user"
-    }
-}
-
-console.log(isValidUserPrompt(userName, userAge))
-
-// Javascript är löst typat
+console.log(calculateTotal(50, 7))
+console.log(calculateTotal(100, 25))
+console.log(calculateTotal(10, 1))

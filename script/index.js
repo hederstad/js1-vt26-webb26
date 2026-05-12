@@ -1,57 +1,51 @@
-// Funktioner
-// En funktion är ett namngivet kodblock som vi kan köra flera gånger.
-// Det gör koden lättare att läsa, återanvända och ändra på ett enda ställe.
+const fruits = ["🍌 banan", "🍎 äpple", "🍊 apelsin", "🥝 kiwi"]
 
-// Varför ska vi använda funktioner?
-// Utan funktioner behöver vi ofta skriva nästan samma kod om och om igen.
-// Här upprepas samma typ av utskrift fyra gånger, men med olika namn.
+console.log("Hela arrayen med frukter", fruits)
+console.log("Antal frukter:", fruits.length)
+console.log("Första frukten:", fruits[0])
 
-console.log("Jag heter: " + "Johan")
-console.log("Jag heter: " + "Elin")
-console.log("Jag heter: " + "Ali")
-console.log("Jag heter: " + "Lisa")
+//Lägger till på sista platsen i arrayen
+fruits.push("🍍 ananas")
+fruits.push("🥭 mango")
 
-// DRY betyder "Don't repeat yourself".
-// Tanken är att undvika upprepning genom att samla återkommande kod i en funktion.
+console.log("Hela arrayen med frukter, efter .push()", fruits)
 
-// Parametrar skrivs mellan parenteserna när funktionen skapas.
-// De fungerar som lokala variabler inne i funktionen.
-// Här är name och age parametrar.
+//Tar bort sista instansen i arrayen
+// fruits.pop()
+// fruits.pop()
 
-function hello(name, age) {
-  // Den här raden visar att koden inuti funktionen körs först när funktionen anropas.
-  console.log("🔥 funktion 🔥")
+console.log("Sista frukten i listan är:", fruits.at(-1))
 
-  // Parametrarna name och age får sina värden från argumenten i funktionsanropet.
-  console.log("Jag heter:", name, "och jag är:", age, "år gammal")
+//.unshift("test") lägger till en instans på fösta positionen i arrayen
+console.log("Först frukten:", fruits[0])
+fruits.unshift("🍍 ananas")
+console.log("Först frukten:", fruits[0])
+fruits.unshift("🥭 mango")
+console.log("Först frukten:", fruits[0])
+
+//.shift() tar bort första instansen i arrayen [0]
+fruits.shift()
+fruits.shift()
+console.log("Först frukten:", fruits[0])
+
+//.includes() returnerar true/false
+
+console.log("Fruits innehåller ett äpple: ", fruits.includes("🍎 äpple"))
+
+if (fruits.includes("🍎 äpple")) {
+  console.log("Det finns äpple!")
+} else {
+  console.log("Det finns inte äpple!")
 }
 
-// Argument är de faktiska värdena som skickas in när vi anropar funktionen.
-// I hello("Johan", 45) är "Johan" det första argumentet och 45 det andra.
-// JavaScript kopplar argumenten till parametrarna i samma ordning:
-// "Johan" hamnar i name och 45 hamnar i age.
-hello("Johan", 45)
-hello("Elin", 63)
-hello("Ali", 25)
-hello("Lisa", 32)
+//.indexof() hitta arrayposition för en viss instans
+console.log("Banan ligger på plats: ", fruits.indexOf("🍌 banan"))
+console.log("Apelsin ligger på plats: ", fruits.indexOf("🍊 apelsin"))
 
-// Arrow function är ett kortare sätt att skriva en funktion.
-// Den här versionen sparas i konstanten arrowFunction.
-// Den fungerar på liknande sätt som hello-funktionen ovan.
-const arrowFunction = (name, age) => {
-  console.log("🏹 Arrow function 🏹")
-  console.log("Jag heter:", name, "och jag är:", age, "år gammal")
-}
+//.slice()
+const someFruit = fruits.slice(2, 6)
 
-// Här anropar vi arrowFunction och skickar in två argument.
-arrowFunction("Gustav", 71)
+console.log(someFruit)
+console.log(fruits)
 
-// Om en arrow function bara har en parameter kan parenteserna tas bort.
-// Om funktionen bara gör en enda sak kan måsvingarna också tas bort.
-// Då blir uttrycket efter pilen funktionens hela innehåll.
-const arrowFunctionShort = name => console.log("Jag heter:", name)
-
-console.log("Arrow short 🏹")
-arrowFunctionShort("Sabina")
-
-//Hoisting
+console.log(fruits.join(", "))
