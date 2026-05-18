@@ -1,3 +1,23 @@
+#colorBox {
+    border: 1px solid black;
+    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
 .red {
-    color: red
+    background-color: red
+}
+
+.violet {
+    background-color: violet;
 }
