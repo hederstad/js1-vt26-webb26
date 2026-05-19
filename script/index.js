@@ -1,34 +1,17 @@
-const title = document.getElementById("title")
-const counter = document.getElementById("counter")
-const btnAdd = document.getElementById("btnAdd")
-const btnSubtract = document.getElementById("btnSubtract")
-const btnColor = document.getElementById("btnColor")
-const colorBox = document.getElementById("colorBox")
+const todoForm = document.getElementById("todoForm")
+const todoInput = document.getElementById("todoInput")
+const todoList = document.getElementById("todoList")
 
-title.innerText = "Testa dom-manipulation"
+todoForm.addEventListener("submit", (event) => {
+  event.preventDefault()
 
-console.log(title.innerText)
+  const todoText = todoInput.value
 
-let count = 0
+  console.log(todoText)
 
-btnAdd.addEventListener("click", () => {
-  count++
+  const todoLi = document.createElement("li")
 
-  console.log(count)
+  todoLi.textContent = todoText
 
-  counter.innerText = `Räknaren är: ${count}`
-})
-
-btnSubtract.addEventListener("click", () => {
-  count--
-
-  console.log(count)
-
-  counter.innerText = `Räknaren är: ${count}`
-})
-
-const colors = ["red", "blue", "violet", "green"]
-
-btnColor.addEventListener("click", () => {
-  colorBox.classList.add(colors[3])
+  todoList.appendChild(todoLi)
 })

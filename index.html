@@ -1,29 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/index.css">
-    <title>JS1 - DOM</title>
+    <Link rel="stylesheet" href="style/index.css">
+    <title>Javascript 1 - TODO Steg 1</title>
 </head>
 
 <body>
-    <h1 id="title">JS1 - DOM</h1>
+    <h1>TODO App</h1>
 
-    <div>
-        <h2>Min första räknare</h2>
-        <p id="counter">Räknaren är: 0</p>
-        <button id="btnAdd">+ öka</button>
-        <button id="btnSubtract">- minska</button>
-    </div>
+    <form id="todoForm">
+        <label for="todoInput">Skriv in din TODO</label>
+        <br>
+        <input type="text" id="todoInput">
 
-    <br />
+        <button type="submit">Lägg till</button>
+    </form>
 
-    <section>
-        <button id="btnColor">Ändra färg</button>
-
-        <div id="colorBox"></div>
+    <section class="todoContainer">
+        <ul id="todoList">
+        </ul>
     </section>
 
     <script src="script/index.js"></script>
