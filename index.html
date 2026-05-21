@@ -9,7 +9,7 @@
     <Link rel="stylesheet" href="style/index.css">
 
 
-    <title>Javascript 1 - TODO Steg 1</title>
+    <title>Javascript 1 - TODO Steg 2</title>
 </head>
 
 <body class="container min-vh-100 d-flex flex-column">
@@ -19,13 +19,15 @@
 
     <main class="flex-grow-1">
         <form id="todoForm">
-            <label for="todoInput">Skriv in din TODO</label>
-            <br>
-            <input type="text" id="todoInput">
+            <div class="mb-3">
+                <label for="todoInput" class="form-label">Skriv in din TODO</label>
+                <input type="text" id="todoInput" class="form-control">
+                <div id="todoHelp" class="form-text">Skriv minst 3 tecken</div>
+            </div>
             <button type="submit" class="btn btn-primary btn-sm">Lägg till</button>
         </form>
 
-        <section class="todoContainer">
+        <section class="todoContainer mt-3">
             <ul id="todoList" class="list-group"></ul>
         </section>
     </main>
