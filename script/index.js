@@ -2,7 +2,7 @@ const todoForm = document.getElementById("todoForm")
 const todoInput = document.getElementById("todoInput")
 const todoList = document.getElementById("todoList")
 
-const todos = []
+let todos = []
 
 const createTodo = (todoText) => {
     const todo = {
@@ -17,6 +17,12 @@ const createTodo = (todoText) => {
 const createTodoListItem = (todo) => {
     const todoLi = document.createElement("li")
     todoLi.classList.add("list-group-item", "d-flex", "justify-content-between")
+
+    if(todo.done) {
+        todoLi.classList.add("done")
+    } else {
+        todoLi.classList.remove("done")
+    }
 
     todoLi.textContent = todo.text
 
@@ -47,7 +53,8 @@ const createDeleteBtn = (todo) => {
     deleteBtn.textContent = "X"
 
     deleteBtn.addEventListener("click", () => {
-        //Ta bort aktuellt object från todos arrayen
+        todos = todos.filter(currentTodo => currentTodo.id !== todo.id)
+        renderTodoList()
     })
 
     return deleteBtn
@@ -60,19 +67,25 @@ const createDoneBtn = (todo) => {
     doneBtn.textContent = "Färdig"
 
     doneBtn.addEventListener("click", () => {
-        todoLi.classList.toggle("text-muted")
+        todo.done = !todo.done
+        console.log("Jag ahr gjor min todo:", todo.done)
+        renderTodoList()
     })
 
     return doneBtn
 }
 
 const renderTodoList = () => {
+    todoList.innerHTML = ""
+
     if(todos.length === 0) {
         return
     }
 
     todos.forEach((todo) => {
-        createTodoListItem(todo)
+       const todoListItem = createTodoListItem(todo)
+
+       todoList.appendChild(todoListItem)
     })
 }
 

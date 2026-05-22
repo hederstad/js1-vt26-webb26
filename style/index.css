@@ -3,11 +3,11 @@
     border: 1px solid grey;
     border-radius: 3px;
 }
+    */
 
 .done {
     background-color: rgb(196, 240, 196);
-    text-decoration: line-through;
-} */
+}
 
 .btnStyles {
     margin-left: auto;
