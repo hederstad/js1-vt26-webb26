@@ -8,20 +8,27 @@ const createTodoLi = (todoText) => {
 
     todoLi.textContent = todoText
 
-    //Hur skapar vi upp btnContainer med knapparna?
-    const ButtonContainer = createBtnContainer()
+    const ButtonContainer = createBtnContainer(todoLi)
 
     todoLi.appendChild(ButtonContainer)
 
     return todoLi
 }
 
-const createBtnContainer = () => {
+const createBtnContainer = (todoLi) => {
     const btnContainer = document.createElement("div")
     btnContainer.classList.add("d-flex", "gap-2")
+
+    const deleteBtn = createDeleteBtn(todoLi)
+    const doneBtn = createDoneBtn(todoLi)
+
+    btnContainer.appendChild(deleteBtn)
+    btnContainer.appendChild(doneBtn)
+
+    return btnContainer
 }
 
-const createDeleteBtn = () => {
+const createDeleteBtn = (todoLi) => {
     const deleteBtn = document.createElement("button")
     deleteBtn.classList.add("btn", "btn-danger", "btn-sm")
 
@@ -30,17 +37,21 @@ const createDeleteBtn = () => {
     deleteBtn.addEventListener("click", () => {
         todoLi.remove()
     })
+
+    return deleteBtn
 }
 
-const createDoneBtn = () => {
-    const doneButton = document.createElement("button")
-    doneButton.classList.add("btn", "btn-success", "btn-sm")
+const createDoneBtn = (todoLi) => {
+    const doneBtn = document.createElement("button")
+    doneBtn.classList.add("btn", "btn-success", "btn-sm")
 
-    doneButton.textContent = "Färdig"
+    doneBtn.textContent = "Färdig"
 
-    doneButton.addEventListener("click", () => {
+    doneBtn.addEventListener("click", () => {
         todoLi.classList.toggle("text-muted")
     })
+
+    return doneBtn
 }
 
 todoForm.addEventListener("submit", (event) => {
