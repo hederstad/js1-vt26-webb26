@@ -2,25 +2,37 @@ const todoForm = document.getElementById("todoForm")
 const todoInput = document.getElementById("todoInput")
 const todoList = document.getElementById("todoList")
 
-const createTodoLi = (todoText) => {
+const todos = []
+
+const createTodo = (todoText) => {
+    const todo = {
+        id: crypto.randomUUID(),
+        text: todoText,
+        done: false
+    }
+    
+    return todo
+}
+
+const createTodoListItem = (todo) => {
     const todoLi = document.createElement("li")
     todoLi.classList.add("list-group-item", "d-flex", "justify-content-between")
 
-    todoLi.textContent = todoText
+    todoLi.textContent = todo.text
 
-    const ButtonContainer = createBtnContainer(todoLi)
+    const ButtonContainer = createBtnContainer(todo)
 
     todoLi.appendChild(ButtonContainer)
 
     return todoLi
 }
 
-const createBtnContainer = (todoLi) => {
+const createBtnContainer = (todo) => {
     const btnContainer = document.createElement("div")
     btnContainer.classList.add("d-flex", "gap-2")
 
-    const deleteBtn = createDeleteBtn(todoLi)
-    const doneBtn = createDoneBtn(todoLi)
+    const deleteBtn = createDeleteBtn(todo)
+    const doneBtn = createDoneBtn(todo)
 
     btnContainer.appendChild(deleteBtn)
     btnContainer.appendChild(doneBtn)
@@ -28,20 +40,20 @@ const createBtnContainer = (todoLi) => {
     return btnContainer
 }
 
-const createDeleteBtn = (todoLi) => {
+const createDeleteBtn = (todo) => {
     const deleteBtn = document.createElement("button")
     deleteBtn.classList.add("btn", "btn-danger", "btn-sm")
 
     deleteBtn.textContent = "X"
 
     deleteBtn.addEventListener("click", () => {
-        todoLi.remove()
+        //Ta bort aktuellt object från todos arrayen
     })
 
     return deleteBtn
 }
 
-const createDoneBtn = (todoLi) => {
+const createDoneBtn = (todo) => {
     const doneBtn = document.createElement("button")
     doneBtn.classList.add("btn", "btn-success", "btn-sm")
 
@@ -52,6 +64,16 @@ const createDoneBtn = (todoLi) => {
     })
 
     return doneBtn
+}
+
+const renderTodoList = () => {
+    if(todos.length === 0) {
+        return
+    }
+
+    todos.forEach((todo) => {
+        createTodoListItem(todo)
+    })
 }
 
 todoForm.addEventListener("submit", (event) => {
@@ -68,9 +90,11 @@ todoForm.addEventListener("submit", (event) => {
 
     const todoText = todoInput.value
 
-    const todoLi = createTodoLi(todoText)
+    const todo = createTodo(todoText)
 
-    todoList.appendChild(todoLi)
+    todos.push(todo)
+
+    renderTodoList()
 
     todoInput.value = ""
     todoInput.focus()
