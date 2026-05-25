@@ -15,6 +15,18 @@ const createTodo = (todoText) => {
     return todo
 }
 
+const saveTodosToLocalStorage = () => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+}
+
+const loadTodosFromLocalStorage = () => {
+    const storedTodos = localStorage.getItem("todos")
+
+    if (storedTodos) {
+        todos = JSON.parse(storedTodos)
+    }
+}
+
 const createTodoListItem = (todo) => {
     const todoLi = document.createElement("li")
     todoLi.classList.add("list-group-item", "d-flex", "justify-content-between")
@@ -55,6 +67,7 @@ const createDeleteBtn = (todo) => {
 
     deleteBtn.addEventListener("click", () => {
         todos = todos.filter(currentTodo => currentTodo.id !== todo.id)
+        saveTodosToLocalStorage()
         renderTodoList()
     })
 
@@ -69,6 +82,7 @@ const createDoneBtn = (todo) => {
 
     doneBtn.addEventListener("click", () => {
         todo.done = !todo.done
+        saveTodosToLocalStorage()
         renderTodoList()
     })
 
@@ -89,8 +103,8 @@ const renderTodoList = () => {
     })
 }
 
-todoForm.addEventListener("submit", (event) => {
-    event.preventDefault()
+todoForm.addEventListener("submit", () => {
+    // event.preventDefault()
     todoHelp.innerText = "Skriv minst 3 tecken"
     todoHelp.classList.remove("text-danger")
 
@@ -111,11 +125,16 @@ todoForm.addEventListener("submit", (event) => {
 
     todos.push(todo)
 
+    saveTodosToLocalStorage()
+
     renderTodoList()
 
     todoInput.value = ""
     todoInput.focus()
 })
+
+loadTodosFromLocalStorage()
+renderTodoList()
 
 /*
 ? event.preventDefault()
